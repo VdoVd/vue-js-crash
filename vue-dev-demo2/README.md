@@ -4,6 +4,8 @@
 ```
 yarn install
 ```
+### backend the project
+yarn backend
 
 ### Compiles and hot-reloads for development
 ```
