@@ -1,7 +1,13 @@
 <template>
 <header>
   <h1>{{title}}</h1>
-  <ButtonComponent @click="onClick" text="Add" color="green"/>
+  <ButtonComponent
+      v-show="homePage"
+      @btn-click="$emit('toggle-add-task')"
+      @click="onClick"
+      :text="showAddTask?'Close':'Add Task'"
+      :color="showAddTask?'red':'green'"
+  />
 </header>
 </template>
 
@@ -10,17 +16,24 @@ import ButtonComponent  from "@/components/Button";
 export default {
   name: "HeaderComponent",
   props: {
-    title: {
-      type: String,
-      default: 'Hello World',
-    },
+    title: String,
+    showAddTask: Boolean,
   },
   components: {
     ButtonComponent
   },
   methods: {
     onClick(){
-      console.log('click')
+      this.$emit('toggle-add-task')
+    }
+  },
+  computed:{
+    homePage(){
+      if(this.$route.path==='/'){
+        return true
+      }else {
+        return false
+      }
     }
   }
 }
